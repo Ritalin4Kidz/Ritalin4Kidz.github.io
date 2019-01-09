@@ -10,7 +10,7 @@
 	</div>
 	<div id = "smalltext" style = "font-size:20;color:black;text-align: center">
 			This is my progress blog on this game that i decided to make.
-	<br>    last updated : 8/01/2019
+	<br>    last updated : 9/01/2019
 	<br> <a href = "index.html"> Back To Main Page </a>
 	</div>
 	</font>
@@ -36,6 +36,94 @@
 	a very unfinished prototype.
 	<br>    Love, from Callum 8/01/2019
 	</div>
+	
+	<div id = "smalltext" style = "font-size:30;color:black;text-align:left">
+	<br> The SYDE Engine Pt.1
+	</div>
+	
+	<div id = "smalltext" style = "font-size:20;color:black;text-align: center">
+	<br> <img src="SYDE_ENGINE_1.PNG" alt="syde001" style="width:393px;height:314px;">
+	</div>
+	<div id = "smalltext" style = "font-size:20;color:black;text-align: left">
+	<br> By the end of this tutorial, anyone reading should be able to understand how this picture gets displayed in the terminal. For part 1, I'm going to give a
+	basic run down on the core window creation. Now there's a bit to talk about, so i'm going to get straight into it, starting
+	with the most basic class of the engine.
+	</div>
+	
+	<div id = "smalltext" style = "font-size:25;color:black;text-align:left">
+	<br> TextItem.h/TextItem.cpp
+	</div>
+	<div id = "smalltext" style = "font-size:20;color:black;text-align: center">
+	<br> <img src="TEXTITEMCPP.PNG" alt="syde001" style="width:320px;height:117px;">
+	</div>
+	<div id = "smalltext" style = "font-size:20;color:black;text-align: center">
+	<br> <img src="TEXTITEMH.PNG" alt="syde001" style="width:595px;height:217px;">
+	</div>
+	<div id = "smalltext" style = "font-size:20;color:black;text-align: left">
+	<br> The TextItem class can be simply defined as the variable for each pixel in the main window. This variable contains both the text and the colour at that point in the window. There's not much to this class, but to use it is simple:
+	<br> - use the getters (getChar, getColour) to return the char and colour respectively
+	<br> - use the '=' to set the TextItem to another TextItem
+	<br> - initialize with TextItem(text, colour)
+	<br> The colour is an int variable, which might seem a bit confusing. However, I will go over it in "ConsoleWindow.h/cpp"
+	</div>
+	
+	<div id = "smalltext" style = "font-size:25;color:black;text-align:left">
+	<br> Line.h/Line.cpp
+	</div>
+	<div id = "smalltext" style = "font-size:20;color:black;text-align: center">
+	<br> <img src="LINEH.PNG" alt="syde001" style="width:651px;height:282px;">
+	</div>
+	<div id = "smalltext" style = "font-size:20;color:black;text-align: center">
+	<br> <img src="LINECPP.PNG" alt="syde001" style="width:652px;height:391px;">
+	<img src="LINECPP2.PNG" alt="syde001" style="width:594px;height:388px;">
+	</div>
+	<div id = "smalltext" style = "font-size:20;color:black;text-align: left">
+	<br> The Line class is where we finally start to get this window showing. Each line holds a vector of TextItems, which we can print to the screen one by one. Because it's done this way, we can change the console's
+	colour output to the one stored in the TextItem everytime we print out a character. This class has no other primary function.
+	</div>
+	
+	<div id = "smalltext" style = "font-size:25;color:black;text-align:left">
+	<br> ConsoleWindow.h/ConsoleWindow.cpp
+	</div>
+	<div id = "smalltext" style = "font-size:20;color:black;text-align: center">
+	<br> <img src="CONSOLEWINDOWCOLOURCLASS.PNG" alt="syde001" style="width:607px;height:375px;">
+	</div>
+	<div id = "smalltext" style = "font-size:20;color:black;text-align: left">
+	<br> First off, the ColourClass. Each Colour in the ColourClass is linked to an integer, starting with 0 (BLACK), and incrementing each time. This allows to initialize the colour in a TextItem with a Colour variable.
+	The key i've done for ColourClass naming is:
+	<br>
+	<br> [TEXTCOLOR]_[BGCOLOR]_BG
+	<br>
+	<br> Except for the initial values, which is the name of the text colour, with a default black background.
+	</div>
+	<div id = "smalltext" style = "font-size:20;color:black;text-align: center">
+	<br> <img src="CONSOLEWINDOWH.PNG" alt="syde001" style="width:1054px;height:355px;">
+	</div>
+	<div id = "smalltext" style = "font-size:20;color:black;text-align: left">
+	<br> I'll go a bit more in-depth about functionality in future blog updates, but for now here's a quick run-down:
+	<br> - Clear Console: Clears the screen, with option to remove all stored text from the window's memory
+	<br> - Add Text To Line: Append text to a line
+	<br> - Add Layer To Line: Set text on a line, wherever a blank space is set, it won't erase that text from the console
+	<br> - Set Line: Change a line in the console
+	<br> - Clear Line: Erase a line in the console
+	<br> - Set Text At Point : Using A Vector 2, Changes the text & colour at a specific point in the console
+	<br> - Get Text Colour At Point : Returns the text colour at a vector 2
+	<br> - Set Offset : Set the position offset of the window
+	<br> - Get Line : Returns a line
+	<br> - Write Console : Prints the window to the terminal
+	<br>
+	<br> Example Usage:
+	<br> To try this out download the source code from my github, then comment everything from the main function except the generateArt() function (Make sure it's uncommented)
+	</div>
+	<div id = "smalltext" style = "font-size:20;color:black;text-align: center">
+	<br> <img src="GENERATEART.PNG" alt="syde001" style="width:1422px;height:680px;">
+	<br> <img src="ARTEXAMPLE.PNG" alt="syde001" style="width:886px;height:409px;">
+	</div>
+	<div id = "smalltext" style = "font-size:20;color:black;text-align: left">
+	<br>That's the basic drawing functions of this engine covered. In the next engine update i'll talk about Vector2 and other core gameplay features.
+	<br>    Love, from Callum 9/01/2019
+	</div>
+	</font>
 	</font>
 </div>
 </html>
