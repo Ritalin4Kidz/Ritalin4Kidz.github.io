@@ -11,7 +11,7 @@
 	<div id = "smalltext" style = "font-size:20;color:black;text-align: center">
 			This is my progress blog on this game that i decided to make.
 	<br>    last updated : 9/01/2019
-	<br> <a href = "index.html"> Back To Main Page </a>
+	<br> <a href = "index.html"> Back To Main Page</a> | <a href = "https://github.com/Ritalin4Kidz/Custom-Console">View Code On Github</a>
 	</div>
 	</font>
 	<font face = "Arial">
@@ -44,6 +44,7 @@
 	<div id = "smalltext" style = "font-size:20;color:black;text-align: center">
 	<br> <img src="SYDE_ENGINE_1.PNG" alt="syde001" style="width:393px;height:314px;">
 	</div>
+	
 	<div id = "smalltext" style = "font-size:20;color:black;text-align: left">
 	<br> By the end of this tutorial, anyone reading should be able to understand how this picture gets displayed in the terminal. For part 1, I'm going to give a
 	basic run down on the core window creation. Now there's a bit to talk about, so i'm going to get straight into it, starting
@@ -123,7 +124,146 @@
 	<br>That's the basic drawing functions of this engine covered. In the next engine update i'll talk about Vector2 and other core gameplay features.
 	<br>    Love, from Callum 9/01/2019
 	</div>
-	</font>
+	
+		<div id = "smalltext" style = "font-size:30;color:black;text-align:left">
+	<br> The SYDE Engine Pt.2, Movement, Vector2s & Rigidbodys
+	</div>
+	
+		<div id = "smalltext" style = "font-size:20;color:black;text-align: center">
+	<br> <img src="SYDEPics\SYDE_001.PNG" alt="syde001" style="width:1514px;height:562px;">
+	</div>
+	<div id = "smalltext" style = "font-size:20;color:black;text-align: left">
+	<br> In this post I'm going to cover a lot of the core gameplay functionality including:
+	<br> - Positioning (Vector2)
+	<br> - Physics (Rigidbody)
+	<br> - Movement
+	<br>
+	<br> By the end of this part, I'm going to show the code for drawing the truck (from the beginning of part 1).
+	<br> Without further ado, let's get started.
+	</div>
+	
+	<div id = "smalltext" style = "font-size:25;color:black;text-align:left">
+	<br> Vector2.h/Vector2.cpp
+	</div>
+	
+	<div id = "smalltext" style = "font-size:20;color:black;text-align: center">
+	<br> <img src="SYDEPics\VECTOR2H.PNG" alt="syde001" style="width:520px;height:518px;">
+	</div>
+	
+	<div id = "smalltext" style = "font-size:20;color:black;text-align: left">
+	<br> I'll assume most people reading this know about the principles of Vector2, however for those who don't, I'll explain it.
+	</div>
+	
+	<div id = "smalltext" style = "font-size:20;color:black;text-align: center">
+	<br> <img src="SYDEPics\GRAPH_001.png" alt="syde001" style="width:300px;height:300px;">
+	</div>
+	
+	<div id = "smalltext" style = "font-size:20;color:black;text-align: left">
+	<br> Simply put, a Vector2 is a position x & y, like on a graph. However, since the window's origin is at the top left instead of the bottom left, when we use Vector2 in this engine, the y is inverted.
+	</div>
+	
+	<div id = "smalltext" style = "font-size:20;color:black;text-align: center">
+	<br> <img src="SYDEPics\GRAPH_002.png" alt="syde001" style="width:300px;height:300px;">
+	</div>
+	
+	<div id = "smalltext" style = "font-size:20;color:black;text-align: left">
+	<br> Inside this class we have the basic setters & getters for the x & y variables. You'll notice that the variables are in float format, however we will be using exclusively whole integers whenever we call this up. This class
+	is not actually complicated at all in it's functionality, so i'll just give a quick run-down.
+	<br> - Operator+(Vector2 other) - For Vector2 + Vector2 operations (e.g. (2,2) + (1,0) == (3,2))
+	<br> - Operator-(Vector2 other) - For Vector2 - Vector2 operations (e.g. (2,2) - (1,0) == (1,2))
+	<br> - Operator*(float other) - For Vector2 * Float operations (e.g. (2,2) * 2 == (4,4))
+	<br> - Operator=(Vector2 other) - For Vector2 = Vector2 operations (e.g. (VectorA (2,2) = VectorB(4,4), VectorA returns (4,4))
+	<br> - Operator==(Vector2 other) - Return true if two Vectors are equivalent to each other.
+	<br> - offset(float other) - Return Vector2(Vector2.x + offset, Vector2.y + offset)	
+	<br> - distance(Vector2 other) - Return the distance between two points in float format.
+	
+	<br> - WillHit(Vector2 other, Vector2 gravity) - Returns a variable to see if the Vector2 will go past/touch a certain position when gravity is applied. Used in Rigidbodys.
+	</div>
+	
+	<div id = "smalltext" style = "font-size:25;color:black;text-align:left">
+	<br> Rigidbody.h/Rigidbody.cpp
+	</div>
+	
+	<div id = "smalltext" style = "font-size:20;color:black;text-align: center">
+	<br> <img src="SYDEPics\RIGIDBODYH.png" alt="syde001" style="width:1469px;height:863px;">
+	</div>
+	
+	<div id = "smalltext" style = "font-size:20;color:black;text-align: left">
+	<br> Now the rigidbody class might seem scary, until you realise that the majority of the functions here are actually just getters and setters. In fact, there is only one function that we need to have a look at in the
+	whole Rigidbody class! That function of course is the Gravity function.
+	</div>
+	
+	<div id = "smalltext" style = "font-size:20;color:black;text-align: center">
+	<br> <img src="SYDEPics\GRAVITY.png" alt="syde001" style="width:701px;height:566px;">
+	</div>
+	
+	<div id = "smalltext" style = "font-size:20;color:black;text-align: left">
+	<br> This is where the WillHit function from the previous class comes into use. The gravity function is simple to explain. We check to see if two rigidbodies are going to hit, if they are, we reduce the speed so that
+	the falling rigidbody does not go through the other rigidbody. If it will not hit anything, then it will continue to fall. We call up the graivty function on a loop in the main gameplay loop.
+	</div>
+	
+	<div id = "smalltext" style = "font-size:20;color:black;text-align: center">
+	<br> <img src="SYDEPics\GRAVITY2.png" alt="syde001" style="width:281px;height:80px;">
+	</div>
+	
+	<div id = "smalltext" style = "font-size:20;color:black;text-align: left">
+	<br> In this loop, we compare everything in the rigidbody array with each other, applying gravity onto every rigidbody (Assuming it is not tagged as Kinematic). Of course there are a bunch of variables here in which
+	I need to explain the use of. I will come back to this when I talk about GameObjects, as it will be more relevant there.
+	</div>
+	
+	<div id = "smalltext" style = "font-size:25;color:black;text-align:left">
+	<br> Movement
+	</div>
+	
+	<div id = "smalltext" style = "font-size:20;color:black;text-align: center">
+	<br> <img src="SYDEPics\KEYDOWN.png" alt="syde001" style="width:358px;height:61px;">
+	</div>
+	
+	<div id = "smalltext" style = "font-size:20;color:black;text-align: left">
+	<br> This simple little piece of code allows us to determine if a key is pressed during a frame. From here we can access it in the gameplay loop like:
+	</div>
+	
+	<div id = "smalltext" style = "font-size:20;color:black;text-align: center">
+	<br> <img src="SYDEPics\MOVEMENT.png" alt="syde001" style="width:687px;height:371px;">
+	</div>
+	
+	<div id = "smalltext" style = "font-size:20;color:black;text-align: left">
+	<br> Note: rbArr[0] is the player.
+	<br> Movement is pretty straight-forward. We move the position of the player to the right if we press 'D', move the position to the left if we press 'A'.
+	</div>
+	
+	<div id = "smalltext" style = "font-size:25;color:black;text-align:left">
+	<br> Drawing The Truck
+	</div>
+	
+	<div id = "smalltext" style = "font-size:20;color:black;text-align: center">
+	<br> <img src="SYDE_ENGINE_1.PNG" alt="syde001" style="width:393px;height:314px;">
+	</div>
+	
+	<div id = "smalltext" style = "font-size:20;color:black;text-align: left">
+	<br> First of note, I'm not going to be showing the whole code, as it can get quite repetitive. I reccomend looking through 'Character.cpp' if you want to view the full code. Instead I'll be focusing on one of the
+	outlines of the truck.
+	</div>
+	
+	<div id = "smalltext" style = "font-size:20;color:black;text-align: center">
+	<br> <img src="SYDEPics\OUTLINETRUCK.PNG" alt="syde001" style="width:657px;height:431px;">
+	</div>
+	
+	<div id = "smalltext" style = "font-size:20;color:black;text-align: left">
+	<br> So what we're doing here is setting the text & text colour at certain points of the console window using 'SetTextAtPoint'. Because this truck will be created from more than one position, we need to create it from a origin
+	point that's passed in as a parameter. (The point variable)
+	</div>
+	
+	<div id = "smalltext" style = "font-size:20;color:black;text-align: center">
+	<br> <img src="SYDEPics\CUTSCENETRUCK.PNG" alt="syde001" style="width:612px;height:260px;">
+	</div>
+	
+	<div id = "smalltext" style = "font-size:20;color:black;text-align: left">
+	<br> In the cutscene loop, we then add this truck to the window to draw, adding to it's X position in each iteration of the loop. It's really just as simple as that! This concludes our quick summary of the SYDE Engine. I will probably go more in-depth to these features as
+	I delve deeper into other gameplay topics. Until then, download the source code and have a play around.
+	<br> Love, Callum 14-01-2019
+	</div>
+	
 	</font>
 </div>
 </html>
