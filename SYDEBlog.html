@@ -16,6 +16,13 @@
 	</font>
 	<font face = "Arial">
 	<div id = "smalltext" style = "font-size:30;color:black;text-align:left">
+	<br> Some Notes When Running Source Code
+	</div>
+	<div id = "smalltext" style = "font-size:20;color:black;text-align: left">
+	<br> - Add in Preprocessor (_CRT_SECURE_NO_WARNINGS) on all configurations
+	<br> - in configsettings.sc make xOffset 1 for windows 7, 2 for windows 10
+	</div>
+	<div id = "smalltext" style = "font-size:30;color:black;text-align:left">
 	<br> Welcome To SYDE
 	</div>
 	
@@ -275,6 +282,110 @@
 	<img src="SYDEPics\TODO_002.PNG" alt="syde001" style="width:656px;height:601px;">
 	</div>
 	
+	<div id = "smalltext" style = "font-size:30;color:black;text-align:left">
+	<br> Loading Image Files In The Terminal
+	</div>
+	
+	<div id = "smalltext" style = "font-size:20;color:black;text-align: center">
+	<br> <img src="SYDEPics\BITMAP_TERMINAL.PNG" alt="syde001" style="width:349px;height:284px;">
+	<img src="SYDEPics\BITMAP_TERMINAL2.PNG" alt="syde001" style="width:349px;height:284px;">
+	</div>
+	
+	<div id = "smalltext" style = "font-size:20;color:black;text-align: left">
+	<br> Here's comes one of the first steps towards making this engine accesible to other people. Image files (well, certain colours, but i'll get to that) can now be loaded into the terminal. The best part, it's as easy to
+	implement as:
+	</div>
+	
+	<div id = "smalltext" style = "font-size:20;color:black;text-align: center">
+	<br> <img src="SYDEPics\USE_BMP_TO_TERMINAL.PNG" alt="syde001" style="width:926px;height:53px;">
+	</div>
+	
+	<div id = "smalltext" style = "font-size:20;color:black;text-align: left">
+	<br> The integer variables are respectively (widonwwidth, windowheight ('doesn't need to be consolewindow width or height, just the amount of pixels used to draw the image), bmpwidth, bmpheight (image dimensions)). In a
+	theoritical usage, the variables should be equal to (2x,y,x,y).
+	<br> Now, as this isn't actually too complicated (but long enough that I need to cover it in it's own post), let's go through exactly how we make this image appear. Note: I used "gdiplus.h" for this.
+	</div>
+	
+	<div id = "smalltext" style = "font-size:20;color:black;text-align: center">
+	<br> <img src="SYDEPics\ASSETS_CLASS_H.PNG" alt="syde001" style="width:1323px;height:556px;">
+	</div>
+	
+	<div id = "smalltext" style = "font-size:20;color:black;text-align: left">
+	<br> The only function we will need to worry about here is the get_bmp_as_direct_colour_class_array function. It does use the get_colour_from_rgb function, but all that function does is check to see if the 
+	rgb matches pre-determined rgb arrays. As a note though, these are the colour values you must use in your image. If a pixel does not equal one of these colours, that specific pixel will return a nullcolour.
+	</div>
+	
+	<div id = "smalltext" style = "font-size:20;color:black;text-align: center">
+	<br> <img src="SYDEPics\COLOUR_SETTINGS.PNG" alt="syde001" style="width:487px;height:286px;">
+	</div>
+	
+	<div id = "smalltext" style = "font-size:25;color:black;text-align:left">
+	<br> get_bmp_as_direct_colour_class_array
+	</div>
+			
+	<div id = "smalltext" style = "font-size:20;color:black;text-align: center">
+	<br> <img src="SYDEPics\GET_COLOUR_ASSETCLASS.PNG" alt="syde001" style="width:1083px;height:275px;">
+	</div>
+	
+	<div id = "smalltext" style = "font-size:20;color:black;text-align: left">
+	<br> So what's happening here is that the function goes through every pixel in the specificied dimensions, and adds the pixel twice to a colour array (twice because pixel width = 1/2pixelheight). We then return that
+	array so that we can use it in the CustomAsset Class.
+	</div>
+	
+	<div id = "smalltext" style = "font-size:25;color:black;text-align:left">
+	<br> CustomAsset
+	</div>
+	
+	<div id = "smalltext" style = "font-size:20;color:black;text-align: center">
+	<br> <img src="SYDEPics\CUSTOMASSETH.PNG" alt="syde001" style="width:579px;height:195px;">
+	<br> <img src="SYDEPics\CUSTOMASSETCPP.PNG" alt="syde001" style="width:998px;height:455px;">
+	</div>
+	
+	<div id = "smalltext" style = "font-size:20;color:black;text-align: left">
+	<br> From here we use the SetAsset function to save the ColourArray into a 2d vector of TextItems. Once saved, when can draw it the same way we've been drawing the whole time. (Note: if colour = NULLCOLOUR, we won't bother drawing
+	the pixel and just skip it).
+	<br> That's all there is too, download the source code and have a go with it. By the way, here's the original image I used to produce the pictures at the start of this post (Scaled to 3x):
+	</div>
+	
+	<div id = "smalltext" style = "font-size:20;color:black;text-align: center">
+	<br> <img src="SYDEPics\colourbitmap.bmp" alt="syde001" style="width:99px;height:99px;">
+	</div>
+	
+	<div id = "smalltext" style = "font-size:20;color:black;text-align: left">
+	<br> The brown is not a recognisable colour, so it doesn't draw any brown pixel.
+	<br> Love, Callum 17-01-2019
+	</div>
+	
+	<div id = "smalltext" style = "font-size:30;color:black;text-align:left">
+	<br> Rigidbodies As A GameObject (In Progress)
+	</div>
+	
+	<div id = "smalltext" style = "font-size:20;color:black;text-align: center">
+	<br> <img src="SYDEPics\RIGIDBODYDIAGRAM.PNG" alt="syde001" style="width:474px;height:409px;">
+	</div>
+	
+	<div id = "smalltext" style = "font-size:20;color:black;text-align: left">
+	<br> In a previous post, I mentioned that I would talk about GameObjects, and how Rigidbodies played a part in it. I'm going to do that now, and hopefully I can go in-depth enough so that anyone reading can get an
+	understanding of what I'm trying to do here. Couple of things of note before I get into this:
+	<br>
+	<br> - Some of these may not yet be implemented, and will be planned for future engine updates
+	<br> - There is no GameObject class, and the Rigidbody class is used as the GameObject Class
+	<br>
+	<br> Without further ado, let's get into it!
+	</div>
+	
+	<div id = "smalltext" style = "font-size:20;color:black;text-align: center">
+	<br> <img src="SYDEPics\RIGIDBODYH.PNG" alt="syde001" style="width:1469px;height:863px;">
+	</div>
+	
+	<div id = "smalltext" style = "font-size:25;color:black;text-align:left">
+	<br> isTrap
+	</div>
+	<div id = "smalltext" style = "font-size:20;color:black;text-align: left">
+	<br> The isTrap variable is not going to have much usage in the main SYDE game, as this was used back when the game was in a way earlier prototyping stage (back when the game was originally planned to be
+	a 2D platformer, the direction changed a little).
+	<br> Last Updated, Callum 17-01-2019
+	</div>
 	</font>
 </div>
 </html>
